@@ -1,7 +1,7 @@
 import numpy as np
 from collections import deque
 
-with open("C:/studia/semestr4/SztucznaInteligencja/pietnastka/puzzles/4x4_07_00211.txt") as f:
+with open("C:/studia/semestr4/SztucznaInteligencja/pietnastka/puzzles/4x4_02_00003.txt") as f:
     rows, cols = np.fromfile(f, dtype=int, count=2, sep=" ")
     data = np.fromfile(f, dtype=int, count=rows * cols, sep=" ").reshape((rows, cols))
 
@@ -43,9 +43,13 @@ def change_state(board, move, index):
         return new_board
     return None
 
+#TODO Dodatkowo w przypadku strategii "w głąb" należy ustalić maksymalną dozwoloną głębokość rekursji,
+# która nie może być mniejsza niż 20 (wartość tę można wpisać na sztywno do programu).
+# W sytuacji, gdy program osiągnie taką głębokość nie znalazłszy rozwiązania, powinien wykonać nawrót
+
 
 def dfs_algorithm_v2(board, path, visited, current_depth, max_depth):
-    print(path)
+    # print(path)
     if is_solved_v2(board):
         return path
     if current_depth >= max_depth:
@@ -60,7 +64,7 @@ def dfs_algorithm_v2(board, path, visited, current_depth, max_depth):
             if result is not None:
                 return result
             path.pop()
-    if index > 0 and index % COL != 0:  # ruch w lewo
+    if index % COL != 0:  # ruch w lewo
         new_board = change_state(board, "L", index)
         if tuple(new_board) not in visited:
             path.append("L")
@@ -87,44 +91,44 @@ def dfs_algorithm_v2(board, path, visited, current_depth, max_depth):
     return None
 
 
+def bfs_algorithm(board):
+    visited = set()
+    q = deque([(board, [])])
+    visited.add(tuple(board))
 
-# def bfs_algorithm(board):
-#     visited = set()
-#     q = deque([(board, [])])
-#     visited.add(tuple(board))
-#
-#     while q:
-#         state, path = q.popleft()
-#         if is_solved_v2(state):
-#             return path
-#
-#         index = state.index(0)
-#
-#         if index >= COL:  # mozna sie ruszyc do góry
-#             new_board = change_state(state, "U", index)
-#             if tuple(new_board) not in visited:
-#                 visited.add(tuple(new_board))
-#                 q.append((new_board, path + ["U"]))
-#
-#         if index > 0 and index % COL != 0:  # ruch w lewo
-#             new_board = change_state(state, "L", index)
-#             if tuple(new_board) not in visited:
-#                 visited.add(tuple(new_board))
-#                 q.append((new_board, path + ["L"]))
-#
-#         if index < COL * ROW - COL:  # ruch w dol
-#             new_board = change_state(state, "D", index)
-#             if tuple(new_board) not in visited:
-#                 visited.add(tuple(new_board))
-#                 q.append((new_board, path + ["D"]))
-#
-#         if index + 1 % COL != 0 and index < COL * ROW - 1:  # ruch w prawo
-#             new_board = change_state(state, "R", index)
-#             if tuple(new_board) not in visited:
-#                 visited.add(tuple(new_board))
-#                 q.append((new_board, path + ["R"]))
-#
-#     return None
+    while q:
+        state, path = q.popleft()
+        # print(path)
+        if is_solved_v2(state):
+            return path
+
+        index = state.index(0)
+
+        if index >= COL:  # mozna sie ruszyc do góry
+            new_board = change_state(state, "U", index)
+            if tuple(new_board) not in visited:
+                visited.add(tuple(new_board))
+                q.append((new_board, path + ["U"]))
+
+        if index % COL != 0:  # ruch w lewo
+            new_board = change_state(state, "L", index)
+            if tuple(new_board) not in visited:
+                visited.add(tuple(new_board))
+                q.append((new_board, path + ["L"]))
+
+        if index < COL * ROW - COL:  # ruch w dol
+            new_board = change_state(state, "D", index)
+            if tuple(new_board) not in visited:
+                visited.add(tuple(new_board))
+                q.append((new_board, path + ["D"]))
+
+        if index + 1 % COL != 0 and index < COL * ROW - 1:  # ruch w prawo
+            new_board = change_state(state, "R", index)
+            if tuple(new_board) not in visited:
+                visited.add(tuple(new_board))
+                q.append((new_board, path + ["R"]))
+
+    return None
 
 
 my_set = set()
