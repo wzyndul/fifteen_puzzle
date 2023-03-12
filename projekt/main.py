@@ -45,7 +45,7 @@ def change_state(board, move, index):
 
 
 def dfs_algorithm_v2(board, path, visited, current_depth, max_depth):
-    print(path)
+    # print(path)
     if is_solved_v2(board):
         return path
     if current_depth >= max_depth:
@@ -88,48 +88,48 @@ def dfs_algorithm_v2(board, path, visited, current_depth, max_depth):
 
 
 
-# def bfs_algorithm(board):
-#     visited = set()
-#     q = deque([(board, [])])
-#     visited.add(tuple(board))
-#
-#     while q:
-#         state, path = q.popleft()
-#         if is_solved_v2(state):
-#             return path
-#
-#         index = state.index(0)
-#
-#         if index >= COL:  # mozna sie ruszyc do góry
-#             new_board = change_state(state, "U", index)
-#             if tuple(new_board) not in visited:
-#                 visited.add(tuple(new_board))
-#                 q.append((new_board, path + ["U"]))
-#
-#         if index > 0 and index % COL != 0:  # ruch w lewo
-#             new_board = change_state(state, "L", index)
-#             if tuple(new_board) not in visited:
-#                 visited.add(tuple(new_board))
-#                 q.append((new_board, path + ["L"]))
-#
-#         if index < COL * ROW - COL:  # ruch w dol
-#             new_board = change_state(state, "D", index)
-#             if tuple(new_board) not in visited:
-#                 visited.add(tuple(new_board))
-#                 q.append((new_board, path + ["D"]))
-#
-#         if index + 1 % COL != 0 and index < COL * ROW - 1:  # ruch w prawo
-#             new_board = change_state(state, "R", index)
-#             if tuple(new_board) not in visited:
-#                 visited.add(tuple(new_board))
-#                 q.append((new_board, path + ["R"]))
-#
-#     return None
+def bfs_algorithm(board):
+    visited = set()
+    q = deque([(board, [])])
+    visited.add(tuple(board))
+
+    while q:
+        state, path = q.popleft()
+        if is_solved_v2(state):
+            return path
+
+        index = state.index(0)
+
+        if index >= COL:  # mozna sie ruszyc do góry
+            new_board = change_state(state, "U", index)
+            if tuple(new_board) not in visited:
+                visited.add(tuple(new_board))
+                q.append((new_board, path + ["U"]))
+
+        if index > 0 and index % COL != 0:  # ruch w lewo
+            new_board = change_state(state, "L", index)
+            if tuple(new_board) not in visited:
+                visited.add(tuple(new_board))
+                q.append((new_board, path + ["L"]))
+
+        if index < COL * ROW - COL:  # ruch w dol
+            new_board = change_state(state, "D", index)
+            if tuple(new_board) not in visited:
+                visited.add(tuple(new_board))
+                q.append((new_board, path + ["D"]))
+
+        if index + 1 % COL != 0 and index < COL * ROW - 1:  # ruch w prawo
+            new_board = change_state(state, "R", index)
+            if tuple(new_board) not in visited:
+                visited.add(tuple(new_board))
+                q.append((new_board, path + ["R"]))
+
+    return None
 
 
 my_set = set()
 solution_path = []
-xd = dfs_algorithm_v2(lista_ukladanka, solution_path, my_set, 0, 20)
+xd = dfs_algorithm_v2(lista_ukladanka, solution_path, my_set, 0, 15)
 print(xd)
 
 
