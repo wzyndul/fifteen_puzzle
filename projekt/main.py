@@ -1,16 +1,22 @@
 import numpy as np
 from collections import deque
-import queue
+import sys
+import time
 
-with open("C:/studia/semestr4/SztucznaInteligencja/pietnastka/puzzles/4x4_07_00211.txt") as f:
+
+
+algorithm_type = sys.argv[1]
+priority = sys.argv[2]
+with open(f"puzzles/{sys.argv[3]}", "r") as f:
     rows, cols = np.fromfile(f, dtype=int, count=2, sep=" ")
     data = np.fromfile(f, dtype=int, count=rows * cols, sep=" ").reshape((rows, cols))
+
 
 # przepisuje do listy na potrzeby drugiego algorytmu
 list_puzzle = data.flatten().tolist()
 ROW = rows
 COL = cols
-MAX_DEPTH = 20
+MAX_DEPTH = 21
 
 
 def is_solved_v2(board):
@@ -47,7 +53,6 @@ def change_state(board, move, index):
 
 
 def dfs_algorithm_v2(board, path, visited, current_depth, priority):
-    # print(path)
     if is_solved_v2(tuple(board)):
         return path
     if current_depth >= MAX_DEPTH:
@@ -129,18 +134,26 @@ def bfs_algorithm(board, priority):
     return None
 
 
-# def Astr(board, heuristic):
-#     q = queue.PriorityQueue()
 
 
+if sys.argv[1] == "dfs":
+    star_time = time.time_ns()
+    algorithm_result = dfs_algorithm_v2(list_puzzle, "", set(), 0, priority)
+    elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
+    print(round(elapsed_time, 3))
+    print(algorithm_result)
+elif sys.argv[1] == "bfs":
+    star_time = time.time_ns()
+    algorithm_result = bfs_algorithm(list_puzzle, priority)
+    elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
+    print(round(elapsed_time, 3))
+    print(algorithm_result)
 
-priority = ["U", "L", "D", "R"]
-dfs_result = dfs_algorithm_v2(list_puzzle, "", set(), 0, priority)
-print(dfs_result)
+with open(f"{sys.argv[4]}", "w") as file:   #otwiera plik i automatycznie go zamyka jak skoncze pisac
+    if algorithm_result is not None:
+        file.write(f"{len(algorithm_result)}\n{algorithm_result}")
+    else:
+        file.write("-1")
 
-
-# bfs_result = bfs_algorithm(list_puzzle, priority)
-# print(bfs_result)
 
 #TODO rozbić na wiele plików i klas   klasa boarda, solver(ma metode bfs i dfs)
-#TODO ogarnac zapisywanie do plików i wywoływanie programu
