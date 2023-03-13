@@ -3,16 +3,12 @@ from collections import deque
 import sys
 import time
 
-
-
 algorithm_type = sys.argv[1]
 priority = sys.argv[2]
 with open(f"puzzles/{sys.argv[3]}", "r") as f:
     rows, cols = np.fromfile(f, dtype=int, count=2, sep=" ")
     data = np.fromfile(f, dtype=int, count=rows * cols, sep=" ").reshape((rows, cols))
 
-
-# przepisuje do listy na potrzeby drugiego algorytmu
 list_puzzle = data.flatten().tolist()
 ROW = rows
 COL = cols
@@ -134,8 +130,6 @@ def bfs_algorithm(board, priority):
     return None
 
 
-
-
 if sys.argv[1] == "dfs":
     star_time = time.time_ns()
     algorithm_result = dfs_algorithm_v2(list_puzzle, "", set(), 0, priority)
@@ -149,11 +143,10 @@ elif sys.argv[1] == "bfs":
     print(round(elapsed_time, 3))
     print(algorithm_result)
 
-with open(f"{sys.argv[4]}", "w") as file:   #otwiera plik i automatycznie go zamyka jak skoncze pisac
+with open(f"{sys.argv[4]}", "w") as file:  # otwiera plik i automatycznie go zamyka jak skoncze pisac
     if algorithm_result is not None:
         file.write(f"{len(algorithm_result)}\n{algorithm_result}")
     else:
         file.write("-1")
 
-
-#TODO rozbić na wiele plików i klas   klasa boarda, solver(ma metode bfs i dfs)
+# TODO rozbić na wiele plików i klas   klasa boarda, solver(ma metode bfs i dfs)
