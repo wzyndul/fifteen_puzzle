@@ -12,7 +12,7 @@ with open(f"puzzles/{sys.argv[3]}", "r") as f:
 list_puzzle = data.flatten().tolist()
 ROW = rows
 COL = cols
-MAX_DEPTH = 21
+MAX_DEPTH = 20
 
 
 def is_solved_v2(board):
@@ -53,42 +53,47 @@ def dfs_algorithm_v2(board, path, visited, current_depth, priority):
         return path
     if current_depth >= MAX_DEPTH:
         return None
-    visited.add(tuple(board))
+    visited.add(hash(tuple(board)))
     index = board.index(0)
     for move in priority:
         if move == "U" and index >= COL:  # mozna sie ruszyc do góry
-            new_board = change_state(board, "U", index)
-            if tuple(new_board) not in visited:
-                path += "U"  # path.append("U")
-                result = dfs_algorithm_v2(new_board, path, visited, current_depth + 1, priority)
-                if result is not None:
-                    return result
-                path = path[:-1]  # path.pop()
+            if path == "" or path[-1] != "D":
+                new_board = change_state(board, "U", index)
+                if hash(tuple(new_board)) not in visited:
+                    path += "U"  # path.append("U")
+                    result = dfs_algorithm_v2(new_board, path, visited, current_depth + 1, priority)
+                    if result is not None:
+                        return result
+                    path = path[:-1]  # path.pop()
         elif move == "L" and index % COL != 0:  # ruch w lewo
-            new_board = change_state(board, "L", index)
-            if tuple(new_board) not in visited:
-                path += "L"
-                result = dfs_algorithm_v2(new_board, path, visited, current_depth + 1, priority)
-                if result is not None:
-                    return result
-                path = path[:-1]
+            if path == "" or path[-1] != "R":
+                new_board = change_state(board, "L", index)
+                if hash(tuple(new_board)) not in visited:
+                    path += "L"
+                    result = dfs_algorithm_v2(new_board, path, visited, current_depth + 1, priority)
+                    if result is not None:
+                        return result
+                    path = path[:-1]
         elif move == "D" and index < COL * ROW - COL:  # ruch w dol
-            new_board = change_state(board, "D", index)
-            if tuple(new_board) not in visited:
-                path += "D"
-                result = dfs_algorithm_v2(new_board, path, visited, current_depth + 1, priority)
-                if result is not None:
-                    return result
-                path = path[:-1]
+            if path == "" or path[-1] != "U":
+                new_board = change_state(board, "D", index)
+                if hash(tuple(new_board)) not in visited:
+                    path += "D"
+                    result = dfs_algorithm_v2(new_board, path, visited, current_depth + 1, priority)
+                    if result is not None:
+                        return result
+                    path = path[:-1]
         elif move == "R" and (index + 1) % COL != 0 and index < COL * ROW - 1:  # ruch w prawo
-            new_board = change_state(board, "R", index)
-            if tuple(new_board) not in visited:
-                path += "R"
-                result = dfs_algorithm_v2(new_board, path, visited, current_depth + 1, priority)
-                if result is not None:
-                    return result
-                path = path[:-1]
+            if path == "" or path[-1] != "L":
+                new_board = change_state(board, "R", index)
+                if hash(tuple(new_board)) not in visited:
+                    path += "R"
+                    result = dfs_algorithm_v2(new_board, path, visited, current_depth + 1, priority)
+                    if result is not None:
+                        return result
+                    path = path[:-1]
     return None
+
 
 
 def bfs_algorithm(board, priority):
@@ -130,6 +135,7 @@ def bfs_algorithm(board, priority):
     return None
 
 
+algorithm_result = None
 if sys.argv[1] == "dfs":
     star_time = time.time_ns()
     algorithm_result = dfs_algorithm_v2(list_puzzle, "", set(), 0, priority)
@@ -149,4 +155,53 @@ with open(f"{sys.argv[4]}", "w") as file:  # otwiera plik i automatycznie go zam
     else:
         file.write("-1")
 
-# TODO rozbić na wiele plików i klas   klasa boarda, solver(ma metode bfs i dfs)
+#TODO zrobic jakeis hashowanie do porównywania stanów w visited
+
+
+
+# STARA WERSJA PROGRAMU BEZ HASHOWANIA
+# def dfs_algorithm_v3(board, path, visited, current_depth, priority):
+#     if is_solved_v2(tuple(board)):
+#         return path
+#     if current_depth >= MAX_DEPTH:
+#         return None
+#     visited.add(tuple(board))
+#     index = board.index(0)
+#     for move in priority:
+#         if move == "U" and index >= COL:  # mozna sie ruszyc do góry
+#             if path == "" or path[-1] != "D":
+#                 new_board = change_state(board, "U", index)
+#                 if tuple(new_board) not in visited:
+#                     path += "U"  # path.append("U")
+#                     result = dfs_algorithm_v2(new_board, path, visited, current_depth + 1, priority)
+#                     if result is not None:
+#                         return result
+#                     path = path[:-1]  # path.pop()
+#         elif move == "L" and index % COL != 0:  # ruch w lewo
+#             if path == "" or path[-1] != "R":
+#                 new_board = change_state(board, "L", index)
+#                 if tuple(new_board) not in visited:
+#                     path += "L"
+#                     result = dfs_algorithm_v2(new_board, path, visited, current_depth + 1, priority)
+#                     if result is not None:
+#                         return result
+#                     path = path[:-1]
+#         elif move == "D" and index < COL * ROW - COL:  # ruch w dol
+#             if path == "" or path[-1] != "U":
+#                 new_board = change_state(board, "D", index)
+#                 if tuple(new_board) not in visited:
+#                     path += "D"
+#                     result = dfs_algorithm_v2(new_board, path, visited, current_depth + 1, priority)
+#                     if result is not None:
+#                         return result
+#                     path = path[:-1]
+#         elif move == "R" and (index + 1) % COL != 0 and index < COL * ROW - 1:  # ruch w prawo
+#             if path == "" or path[-1] != "L":
+#                 new_board = change_state(board, "R", index)
+#                 if tuple(new_board) not in visited:
+#                     path += "R"
+#                     result = dfs_algorithm_v2(new_board, path, visited, current_depth + 1, priority)
+#                     if result is not None:
+#                         return result
+#                     path = path[:-1]
+#     return None
