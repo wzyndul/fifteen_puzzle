@@ -50,7 +50,9 @@ def change_state(board, move, index):
 
 def dfs_algorithm_v2(board, path, visited, current_depth, priority, counter_visited_states):
     if is_solved_v2(tuple(board)):
-        return path, counter_visited_states, len(visited)
+        #visited to uklady odwiedzone, ale przechowujemy je w tym secie, aby stany posiadajace takie same uklady nie byly ponownie przetwarzane
+        #len(visited) = liczba stanow przetworzonych, counter_visited_states = liczba stanow odwiedzonych
+        return path, counter_visited_states, visited
     if current_depth >= MAX_DEPTH:
         return None
     visited.add(hash(tuple(board)))
@@ -147,6 +149,8 @@ if sys.argv[1] == "dfs":
     elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
     print(round(elapsed_time, 3))
     print(algorithm_result)
+    print(visited_states)
+    print(len(processed_states))
 elif sys.argv[1] == "bfs":
     star_time = time.time_ns()
     algorithm_result = bfs_algorithm(list_puzzle, priority)
