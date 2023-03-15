@@ -79,7 +79,7 @@ def dfs_algorithm_v2(board, path, visited, current_depth, priority):
     visited.add(hash(tuple(board)))
     index = board.index(0)
     for move in priority:
-        if move == "U" and index >= COL:  # mozna sie ruszyc do góry
+        if move == "U" and int(index / COL) != 0:  # mozna sie ruszyc do góry   #index >= COL:
             if path == "" or path[-1] != "D":
                 new_board = change_state(board, "U", index)
                 if hash(tuple(new_board)) not in visited:
@@ -88,7 +88,7 @@ def dfs_algorithm_v2(board, path, visited, current_depth, priority):
                     if result is not None:
                         return result
                     path = path[:-1]  # path.pop()
-        elif move == "L" and index % COL != 0:  # ruch w lewo
+        elif move == "L" and index % COL != 0:  # ruch w lewo index % COL != 0
             if path == "" or path[-1] != "R":
                 new_board = change_state(board, "L", index)
                 if hash(tuple(new_board)) not in visited:
@@ -97,7 +97,7 @@ def dfs_algorithm_v2(board, path, visited, current_depth, priority):
                     if result is not None:
                         return result
                     path = path[:-1]
-        elif move == "D" and index < COL * ROW - COL:  # ruch w dol
+        elif move == "D" and int(index / COL) != ROW - 1:  # ruch w dol  index < COL * ROW - COL
             if path == "" or path[-1] != "U":
                 new_board = change_state(board, "D", index)
                 if hash(tuple(new_board)) not in visited:
@@ -106,7 +106,7 @@ def dfs_algorithm_v2(board, path, visited, current_depth, priority):
                     if result is not None:
                         return result
                     path = path[:-1]
-        elif move == "R" and (index + 1) % COL != 0 and index < COL * ROW - 1:  # ruch w prawo
+        elif move == "R" and index % COL != COL - 1:  # ruch w prawo  and (index + 1) % COL != 0 and index < COL * ROW - 1
             if path == "" or path[-1] != "L":
                 new_board = change_state(board, "R", index)
                 if hash(tuple(new_board)) not in visited:
@@ -130,25 +130,25 @@ def bfs_algorithm(board, priority):
 
         index = state.index(0)
         for move in priority:
-            if move == "U" and index >= COL:  # mozna sie ruszyc do góry
+            if move == "U" and int(index / COL) != 0:  # mozna sie ruszyc do góry
                 new_board = change_state(state, "U", index)
                 if tuple(new_board) not in visited:
                     visited.add(tuple(new_board))
                     q.append((new_board, path + "U"))
 
-            elif move == "L" and index > 0 and index % COL != 0:  # ruch w lewo
+            elif move == "L" and index % COL != 0:  # ruch w lewo
                 new_board = change_state(state, "L", index)
                 if tuple(new_board) not in visited:
                     visited.add(tuple(new_board))
                     q.append((new_board, path + "L"))
 
-            elif move == "D" and index < COL * ROW - COL:  # ruch w dol
+            elif move == "D" and int(index / COL) != ROW - 1:  # ruch w dol
                 new_board = change_state(state, "D", index)
                 if tuple(new_board) not in visited:
                     visited.add(tuple(new_board))
                     q.append((new_board, path + "D"))
 
-            elif move == "R" and index + 1 % COL != 0 and index < COL * ROW - 1:  # ruch w prawo
+            elif move == "R" and index % COL != COL - 1:  # ruch w prawo
                 new_board = change_state(state, "R", index)
                 if tuple(new_board) not in visited:
                     visited.add(tuple(new_board))
@@ -179,6 +179,8 @@ with open(f"{sys.argv[4]}", "w") as file:  # otwiera plik i automatycznie go zam
     else:
         file.write("-1")
 
+# TODO zamiast patrzec ostatni char ze stringa czy byl ruch to mzoesz przekazywac jako parametr
+# TODO zawsze mozna zrobic liste i dodawac sasiadow
 # TODO zrobic jakeis hashowanie do porównywania stanów w visited
 
 # Step-by-step explanation:
