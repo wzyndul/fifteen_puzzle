@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="11044387-2d39-43a2-927a-167ea378817b" name="Changes" comment="added hash function which slightly improved time complexity">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/puzzles/ukladanka.txt" beforeDir="false" afterPath="$PROJECT_DIR$/puzzles/ukladanka.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,5 +134,16 @@
     <MESSAGE value="added timer" />
     <MESSAGE value="added hash function which slightly improved time complexity" />
     <option name="LAST_COMMIT_MESSAGE" value="added hash function which slightly improved time complexity" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>173</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
