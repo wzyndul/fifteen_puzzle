@@ -118,7 +118,7 @@ def dfs_algorithm_v2(board, path, visited, current_depth, priority):
     return None
 
 
-def bfs_algorithm(board, priority):
+def bfs_algorithm(board, priority):  # tez sprawdac poprzedni ruch
     visited = set()
     q = deque([(board, "")])
     visited.add(tuple(board))
@@ -157,8 +157,76 @@ def bfs_algorithm(board, priority):
     return None
 
 
+def get_neighbors(board, priority, last_move):  ## dodoac
+    index = board.index(0)
+    neighbors = []
+    for move in priority:
+        if move == "U" and int(index / COL) != 0 and last_move != "D":  # mozna sie ruszyc do góry
+            new_board = change_state(board, "U", index)
+            neighbors.append((new_board, move))
+        elif move == "L" and index % COL != 0 and last_move != "R":  # ruch w lewo
+            new_board = change_state(board, "L", index)
+            neighbors.append((new_board, move))
+        elif move == "D" and int(index / COL) != ROW - 1 and last_move != "U":  # ruch w dol
+            new_board = change_state(board, "D", index)
+            neighbors.append((new_board, move))
+        elif move == "R" and index % COL != COL - 1 and last_move != "L":  # ruch w prawo
+            new_board = change_state(board, "R", index)
+            neighbors.append((new_board, move))
+    return neighbors
+
+
+def a_star_algorithm(start_board, priorit):  # niestety tylko trzymam tylko node a nie potrzebne ruchy
+    open_list = [(start_board, "")]
+    closed_list = []
+    cost = {tuple(start_board): 0}  # Convert list to tuple
+    parent = {tuple(start_board): (None, "")}  # Convert list to tuple
+    while open_list:
+        # Get the node with the lowest cost
+        current = min(open_list, key=lambda node: cost[tuple(node)] + hamming_heuristic(node))
+
+        # Check if the goal is reached
+        if is_solved_v2(tuple(current)):
+            path = []
+            while current is not None:
+                path.append(current)
+                current = parent[tuple(current)]
+            path.reverse()
+            return path
+
+        # Move the current node from the open list to the closed list
+        open_list.remove(current)
+        closed_list.append(current)
+
+        # Loop through the neighbors of the current node
+        for neighbor in get_neighbors(current, priorit, move):
+            # Check if the neighbor is already evaluated
+            if neighbor in closed_list:
+                continue
+            # Calculate the tentative cost to reach the neighbor node
+            tentative_cost = cost[tuple(current)] + 1
+
+            # Check if the neighbor node is not in the open list
+            if neighbor not in open_list:
+                open_list.append((neighbor)
+            # Check if the tentative cost is greater than or equal to the cost to reach the neighbor node
+            elif tentative_cost >= cost[tuple(neighbor)]:
+                continue
+            # Update the cost and parent dictionary
+            cost[tuple(neighbor)] = tentative_cost
+            parent[tuple(neighbor)] = current
+
+    # No path found
+    return None
+
+
 print(f"odleglosc manhattan: {manhattan_heuristic(list_puzzle)}")
 print(f"odleglosc hamminga: {hamming_heuristic(list_puzzle)}")
+star_time = time.time_ns()
+a_star_wynik = a_star_algorithm(list_puzzle, priority)
+elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
+print(round(elapsed_time, 3))
+print(f"wynik a stara: {a_star_wynik}")
 algorithm_result = None
 if sys.argv[1] == "dfs":
     star_time = time.time_ns()
@@ -182,6 +250,7 @@ with open(f"{sys.argv[4]}", "w") as file:  # otwiera plik i automatycznie go zam
 # TODO zamiast patrzec ostatni char ze stringa czy byl ruch to mzoesz przekazywac jako parametr
 # TODO zawsze mozna zrobic liste i dodawac sasiadow
 # TODO zrobic jakeis hashowanie do porównywania stanów w visited
+
 
 # Step-by-step explanation:
 #
