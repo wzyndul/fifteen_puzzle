@@ -8,7 +8,7 @@ class Board:
         self.board = puzzle
         self.parent = None
         self.last_move = ''
-        if priority == "hamm" or priority == "manh": # jesli mam do czynienia z a starem
+        if priority == "hamm" or priority == "manh":  # jesli mam do czynienia z a starem
             self.priority = "LURD"  # to na sztywno daje wybrana kolejnosc
             self.heuristic = priority
         else:
@@ -33,7 +33,7 @@ class Board:
     def __hash__(self):
         return hash(tuple(self.board))
 
-    def is_solved(self): # sprawdzenie czy mamy rozwiązanie
+    def is_solved(self):  # sprawdzenie czy mamy rozwiązanie
         solution = list(range(1, self.row * self.col)) + [0]
         return tuple(self.board) == tuple(solution)
 

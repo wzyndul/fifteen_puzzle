@@ -5,7 +5,6 @@ from collections import deque
 import sys
 import time
 from board import Board
-from stare_funkcje_nie_korzystac import bfs_algorithm_v2, dfs_algorithm_v2
 
 algorithm_type = sys.argv[1]
 priority = sys.argv[2]
@@ -82,14 +81,8 @@ def a_star_algorithm(board):  # niestety tylko trzymam tylko node a nie potrzebn
     return None
 
 
-# zosatwiłem też stare funkcje, zeby testować czasy
 algorithm_result = None
 if sys.argv[1] == "dfs":
-    # star_time = time.time_ns()
-    # algorithm_result = dfs_algorithm_v2(list_puzzle, "", set(), 0, priority)
-    # elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
-    # print(round(elapsed_time, 3))
-    # print(algorithm_result)
 
     star_time = time.time_ns()
     algorithm_result = dfs_algorithm(puzzle, "", set())
@@ -97,11 +90,6 @@ if sys.argv[1] == "dfs":
     print(round(elapsed_time, 3))
     print(algorithm_result)
 elif sys.argv[1] == "bfs":
-    # star_time = time.time_ns()
-    # algorithm_result = bfs_algorithm_v2(list_puzzle, priority)
-    # elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
-    # print(round(elapsed_time, 3))
-    # print(algorithm_result)
 
     star_time = time.time_ns()
     algorithm_result = bfs_algorithm(puzzle)
