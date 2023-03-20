@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="11044387-2d39-43a2-927a-167ea378817b" name="Changes" comment="changed some code, now i will try to make dfs, astr, bfs object oriented">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fsfa.txt" beforeDir="false" afterPath="$PROJECT_DIR$/fsfa.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2MvQwcpitAcGkLMTbySNmx9o96L" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Wojciech Żyndul/Desktop/SkyNet_SISE/SkyNet_SISE&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="python" type="PythonConfigurationType" factoryName="Python">
+      <module name="projekt" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Wojciech Żyndul\AppData\Local\Programs\Python\Python39\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="astr manh 4x4_07_00199.txt fsfa.txt" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="11044387-2d39-43a2-927a-167ea378817b" name="Changes" comment="" />
+      <created>1678645818504</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1678645818504</updated>
+    </task>
+    <task id="LOCAL-00001" summary="in the middle of rebuilding the project">
+      <created>1678732494730</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678732494730</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added board.py">
+      <created>1678735872040</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1678735872040</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added reading arguments from terminal">
+      <created>1678743216978</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1678743216978</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added timer">
+      <created>1678745313388</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1678745313388</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added hash function which slightly improved time complexity">
+      <created>1678795328965</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1678795328965</updated>
+    </task>
+    <task id="LOCAL-00006" summary="added manhattan and hamming heuristic. Added generated pseudo code to A*">
+      <created>1678906486078</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1678906486078</updated>
+    </task>
+    <task id="LOCAL-00007" summary="some changes">
+      <created>1678916070496</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1678916070496</updated>
+    </task>
+    <task id="LOCAL-00008" summary="another try to OOP model">
+      <created>1679050488970</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679050488970</updated>
+    </task>
+    <task id="LOCAL-00009" summary="code cleaned, trash files deleted">
+      <created>1679159696923</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679159696923</updated>
+    </task>
+    <task id="LOCAL-00010" summary="changed some code, now i will try to make dfs, astr, bfs object oriented">
+      <created>1679344206595</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1679344206595</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="in the middle of rebuilding the project" />
+    <MESSAGE value="added board.py" />
+    <MESSAGE value="added reading arguments from terminal" />
+    <MESSAGE value="added timer" />
+    <MESSAGE value="added hash function which slightly improved time complexity" />
+    <MESSAGE value="added manhattan and hamming heuristic. Added generated pseudo code to A*" />
+    <MESSAGE value="some changes" />
+    <MESSAGE value="another try to OOP model" />
+    <MESSAGE value="Finished dfs, bfs and astar in Object Programming" />
+    <MESSAGE value="code cleaned, trash files deleted" />
+    <MESSAGE value="changed some code, now i will try to make dfs, astr, bfs object oriented" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed some code, now i will try to make dfs, astr, bfs object oriented" />
+  </component>
+</project>
