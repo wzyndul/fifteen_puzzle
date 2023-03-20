@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11044387-2d39-43a2-927a-167ea378817b" name="Changes" comment="changed some code, now i will try to make dfs, astr, bfs object oriented">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+    <list default="true" id="11044387-2d39-43a2-927a-167ea378817b" name="Changes" comment="deleted astr.py">
+      <change afterPath="$PROJECT_DIR$/astr.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +58,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
-      <option name="PARAMETERS" value="bfs LURD ukladanka.txt fsfs.txt" />
+      <option name="PARAMETERS" value="astr manh ukladanka.txt fsfs.txt" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -146,7 +146,21 @@
       <option name="project" value="LOCAL" />
       <updated>1679344206595</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="adad">
+      <created>1679353044376</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1679353044376</updated>
+    </task>
+    <task id="LOCAL-00012" summary="deleted astr.py">
+      <created>1679353109782</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1679353109782</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -172,6 +186,8 @@
     <MESSAGE value="Finished dfs, bfs and astar in Object Programming" />
     <MESSAGE value="code cleaned, trash files deleted" />
     <MESSAGE value="changed some code, now i will try to make dfs, astr, bfs object oriented" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed some code, now i will try to make dfs, astr, bfs object oriented" />
+    <MESSAGE value="adad" />
+    <MESSAGE value="deleted astr.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="deleted astr.py" />
   </component>
 </project>
