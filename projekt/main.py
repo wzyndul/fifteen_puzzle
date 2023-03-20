@@ -1,11 +1,11 @@
-from queue import PriorityQueue
-
 import numpy as np
-from collections import deque
 import sys
 import time
+
+from astr import Astr
+from bfs_algorithm import Bfs
 from board import Board
-from stare_smeici_nie_ruszac import bfs_algorithm_v2, dfs_algorithm_v2
+from dfs_algorithm import Dfs
 
 algorithm_type = sys.argv[1]
 priority = sys.argv[2]
@@ -19,99 +19,26 @@ COL = cols
 MAX_DEPTH = 20
 puzzle = Board(cols, rows, list_puzzle, priority)
 
-
-def dfs_algorithm(board, path, visited):
-    if board.is_solved():
-        return path
-    if board.depth >= MAX_DEPTH:
-        return None
-    visited.add(board.__hash__())
-    board.move()
-    for neighbor in board.get_neighbors():
-        if neighbor.__hash__() not in visited:
-            path += neighbor.last_move  # path.append("U")
-            result = dfs_algorithm(neighbor, path, visited)
-            if result is not None:
-                return result
-            path = path[:-1]  # path.pop()
-    return None
-
-
-def bfs_algorithm(board):
-    visited = set()
-    q = deque([(board, "")])
-    visited.add(board.__hash__())
-    while q:
-        state, path = q.popleft()
-        if state.is_solved():
-            return path
-        state.move()
-        for neighbour in state.get_neighbors():
-            if neighbour.__hash__() not in visited:
-                visited.add(neighbour.__hash__())
-                q.append((neighbour, path + neighbour.last_move))
-    return None
-
-
-def a_star_algorithm(board):  # niestety tylko trzymam tylko node a nie potrzebne ruchy
-    q = PriorityQueue()
-    q.put((0, board))
-    closed_set = set()
-    while not q.empty():
-        # Get the node with the lowest cost
-        current = q.get()[1]
-        closed_set.add(current.__hash__())
-
-        if current.is_solved():
-            path = ""
-            while current.last_move != "":
-                path += current.last_move
-                current = current.parent
-            reversed_path = path[::-1]
-            return reversed_path
-
-        # Loop through the neighbors of the current node
-        current.move()
-        for neighbor in current.get_neighbors():
-
-            if neighbor.__hash__() not in closed_set:
-                cost = neighbor.depth + neighbor.get_heuristic_cost()
-                q.put((cost, neighbor))
-
-    # No path found
-    return None
-
-
-# zosatwiłem też stare funkcje, zeby testować czasy
 algorithm_result = None
 if sys.argv[1] == "dfs":
-    # star_time = time.time_ns()
-    # algorithm_result = dfs_algorithm_v2(list_puzzle, "", set(), 0, priority)
-    # elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
-    # print(round(elapsed_time, 3))
-    # print(algorithm_result)
-
+    dfs = Dfs()
     star_time = time.time_ns()
-    algorithm_result = dfs_algorithm(puzzle, "", set())
+    algorithm_result = dfs.dfs_solve(puzzle)
     elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
     print(round(elapsed_time, 3))
     print(algorithm_result)
 elif sys.argv[1] == "bfs":
-    # star_time = time.time_ns()
-    # algorithm_result = bfs_algorithm_v2(list_puzzle, priority)
-    # elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
-    # print(round(elapsed_time, 3))
-    # print(f"funkcja nie obiektowa: {algorithm_result}")
-
+    bfs = Bfs(puzzle)
     star_time = time.time_ns()
-    algorithm_result = bfs_algorithm(puzzle)
+    algorithm_result = bfs.bfs_solve()
     elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
     print(round(elapsed_time, 3))
     print(algorithm_result)
 
 elif sys.argv[1] == "astr":
+    astr = Astr(puzzle)
     star_time = time.time_ns()
-    algorithm_result = a_star_algorithm(puzzle)
+    algorithm_result = astr.astr_solve()
     elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
     print(round(elapsed_time, 3))
     print(algorithm_result)
