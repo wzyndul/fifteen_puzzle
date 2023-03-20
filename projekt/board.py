@@ -8,14 +8,14 @@ class Board:
         self.board = puzzle
         self.parent = None
         self.last_move = ''
-        if priority == "hamm" or priority == "manh": # jesli mam do czynienia z a starem
+        if priority == "hamm" or priority == "manh":  # jesli mam do czynienia z a starem
             self.priority = "LURD"  # to na sztywno daje wybrana kolejnosc
             self.heuristic = priority
         else:
             self.priority = priority
             self.heuristic = None
         self.neighbors = []
-        self.depth = 0
+        self.depth = 1
 
     def get_neighbors(self):
         return self.neighbors
@@ -31,9 +31,11 @@ class Board:
         return new_instance
 
     def __hash__(self):
-        return hash(tuple(self.board))
+        board_copy = self.board.copy()
+        board_copy.append(self.depth)
+        return hash(tuple(board_copy))
 
-    def is_solved(self): # sprawdzenie czy mamy rozwiązanie
+    def is_solved(self):  # sprawdzenie czy mamy rozwiązanie
         solution = list(range(1, self.row * self.col)) + [0]
         return tuple(self.board) == tuple(solution)
 
@@ -108,3 +110,11 @@ class Board:
 
     def __lt__(self, other):  # musiałem zdefiniować less than "<" operator, zeby móc jakoś porównywać obiektu
         return True  # typu Board. Zwracam, true bo jak mają taki sam koszt to juz obojetnie, ktory pierwszy
+
+    def __str__(self):
+        result = ""
+        for i in range(0, self.row):
+            for j in range(0, self.col):
+                result += str(self.board[self.row * i + j]) + " "
+            result += "\n"
+        print(result)

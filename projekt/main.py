@@ -5,7 +5,7 @@ from collections import deque
 import sys
 import time
 from board import Board
-from stare_funkcje_nie_korzystac import bfs_algorithm_v2, dfs_algorithm_v2
+from stare_smeici_nie_ruszac import bfs_algorithm_v2, dfs_algorithm_v2
 
 algorithm_type = sys.argv[1]
 priority = sys.argv[2]
@@ -101,7 +101,7 @@ elif sys.argv[1] == "bfs":
     # algorithm_result = bfs_algorithm_v2(list_puzzle, priority)
     # elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
     # print(round(elapsed_time, 3))
-    # print(algorithm_result)
+    # print(f"funkcja nie obiektowa: {algorithm_result}")
 
     star_time = time.time_ns()
     algorithm_result = bfs_algorithm(puzzle)
