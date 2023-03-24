@@ -27,6 +27,9 @@ if sys.argv[1] == "dfs":
     elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
     print(round(elapsed_time, 3))
     print(algorithm_result)
+    visited_states, proceseed_states = dfs.states_counter()
+    print(visited_states)
+    print(proceseed_states)
 elif sys.argv[1] == "bfs":
     bfs = Bfs(puzzle)
     star_time = time.time_ns()
