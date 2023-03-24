@@ -4,7 +4,7 @@ class Dfs:
         self.visited = set()
         self.max_depth = 20
 
-    def dfs_solve(self, board):
+    def dfs_solve(self, board): # moze zrobic tak zeby dla dfs_a kopiowac tylko boarda, a nie cale obiekty
         if board.is_solved():
             return self.path
         if board.depth >= self.max_depth:
