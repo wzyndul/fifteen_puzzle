@@ -20,37 +20,48 @@ MAX_DEPTH = 20
 puzzle = Board(cols, rows, list_puzzle, priority)
 
 algorithm_result = None
+visited_states = None
+processed_states = None
+algorithm_time = None
+max_recursion = None
 if sys.argv[1] == "dfs":
     dfs = Dfs()
-    star_time = time.time_ns()
     algorithm_result = dfs.dfs_solve(puzzle)
-    elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
-    print(round(elapsed_time, 3))
-    print(algorithm_result)
-    visited_states, proceseed_states = dfs.states_counter()
-    print(visited_states)
-    print(proceseed_states)
+    algorithm_time = dfs.algorithm_time()
+    visited_states, processed_states = dfs.states_counter()
+    max_recursion = dfs.recursion_reached()
+
 elif sys.argv[1] == "bfs":
     bfs = Bfs(puzzle)
-    star_time = time.time_ns()
     algorithm_result = bfs.bfs_solve()
-    elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
-    print(round(elapsed_time, 3))
-    print(algorithm_result)
-    visited_states, proceseed_states = bfs.states_counter()
-    print(visited_states)
-    print(proceseed_states)
+    algorithm_time = bfs.algorithm_time()
+    visited_states, processed_states = bfs.states_counter()
+    max_recursion = bfs.recursion_reached()
+
 
 elif sys.argv[1] == "astr":
     astr = Astr(puzzle)
-    star_time = time.time_ns()
     algorithm_result = astr.astr_solve()
-    elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
-    print(round(elapsed_time, 3))
-    print(algorithm_result)
+    algorithm_time = astr.algorithm_time()
+    visited_states, processed_states = astr.states_counter()
+    max_recursion = astr.recursion_reached()
 
-with open(f"{sys.argv[4]}", "w") as file:  # otwiera plik i automatycznie go zamyka jak skoncze pisac
+
+with open(f"{sys.argv[4]}", "w") as output_file:  # otwiera plik i automatycznie go zamyka jak skoncze pisac
     if algorithm_result is not None:
-        file.write(f"{len(algorithm_result)}\n{algorithm_result}")
+        output_file.write(f"{len(algorithm_result)}\n{algorithm_result}")
     else:
-        file.write("-1")
+        output_file.write("-1")
+
+
+with open(f"{sys.argv[5]}", "w") as output_file:
+    if algorithm_result is not None:
+        output_file.write(f"{len(algorithm_result)}\n")
+    else:
+        output_file.write("-1\n")
+    output_file.write(f"{visited_states}\n")
+    output_file.write(f"{processed_states}\n")
+    output_file.write(f"{max_recursion}\n")
+    output_file.write(f"{algorithm_time}")
+
+

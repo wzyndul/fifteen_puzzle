@@ -15,7 +15,7 @@ class Board:
             self.priority = priority
             self.heuristic = None
         self.neighbors = []
-        self.depth = 1
+        self.depth = 0
 
     def get_neighbors(self):
         return self.neighbors
