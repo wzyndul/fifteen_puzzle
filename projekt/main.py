@@ -46,14 +46,14 @@ elif sys.argv[1] == "astr":
     visited_states, processed_states = astr.states_counter()
     max_recursion = astr.recursion_reached()
 
-with open(f"{sys.argv[4]}", "w") as output_file:  # otwiera plik i automatycznie go zamyka jak skoncze pisac
+with open(f"stats/{sys.argv[4]}", "w") as output_file:  # otwiera plik i automatycznie go zamyka jak skoncze pisac
     if algorithm_result is not None:
         output_file.write(f"{len(algorithm_result)}\n{algorithm_result}")
     else:
         output_file.write("-1")
 
 
-with open(f"{sys.argv[5]}", "w") as output_file:
+with open(f"stats/{sys.argv[5]}", "w") as output_file:
     if algorithm_result is not None:
         output_file.write(f"{len(algorithm_result)}\n")
     else:

@@ -18,7 +18,7 @@
 # actual program, using the absolute (or relative) path, for example:
 #  $Progcmd = 'java -jar C:\Users\User\15puzzle\bin\puzzleval.jar'
 
-$Progcmd = 'python C:\studia\semestr4\SztucznaInteligencja\pietnastka\projekt\main.py bfs RDUL 4x4_07_00211.txt 4x4_07_00211_bfs_rdul_sol.txt halo.txt'
+$Progcmd = 'python C:\studia\semestr4\SztucznaInteligencja\pietnastka\projekt\main.py'
 $SolFilenameRegex = '^[a-zA-Z0-9]+_[0-9]+_[0-9]+_[a-zA-Z]+_[a-zA-Z]+_sol.txt$'
 
 $NumCorrectSols = 0
@@ -27,7 +27,7 @@ $NumIncorrectSols = 0
 Get-ChildItem -File | Where-Object { $_.Name -match $SolFilenameRegex } | ForEach-Object {
     $SplitFilename = $_.Name.Split('_');
     $InitFilename = $('{0}_{1}_{2}.txt' -f $SplitFilename[0], $SplitFilename[1], $SplitFilename[2])
-    Write-Host $('{0}: ' -f $_.Name) -NoNewline
+#    Write-Host $('{0}: ' -f $_.Name) -NoNewline
     Invoke-Expression $('{0} {1} {2}' -f $Progcmd, $InitFilename, $_.Name)
     if ($LastExitCode -eq 0) {
         $NumCorrectSols++
