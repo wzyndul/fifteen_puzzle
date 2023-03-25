@@ -9,7 +9,7 @@ from dfs_algorithm import Dfs
 
 algorithm_type = sys.argv[1]
 priority = sys.argv[2]
-with open(f"puzzles/{sys.argv[3]}", "r") as f:
+with open(f"{sys.argv[3]}", "r") as f:
     rows, cols = np.fromfile(f, dtype=int, count=2, sep=" ")
     data = np.fromfile(f, dtype=int, count=rows * cols, sep=" ").reshape((rows, cols))
 
