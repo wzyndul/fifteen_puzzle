@@ -9,7 +9,7 @@ from dfs_algorithm import Dfs
 
 algorithm_type = sys.argv[1]
 priority = sys.argv[2]
-with open(f"puzzles/{sys.argv[3]}", "r") as f:
+with open(f"puzzles1/{sys.argv[3]}", "r") as f:
     rows, cols = np.fromfile(f, dtype=int, count=2, sep=" ")
     data = np.fromfile(f, dtype=int, count=rows * cols, sep=" ").reshape((rows, cols))
 
@@ -46,7 +46,7 @@ elif sys.argv[1] == "astr":
     visited_states, processed_states = astr.states_counter()
     max_recursion = astr.recursion_reached()
 
-
+print("DUPAAAAAA")
 with open(f"{sys.argv[4]}", "w") as output_file:  # otwiera plik i automatycznie go zamyka jak skoncze pisac
     if algorithm_result is not None:
         output_file.write(f"{len(algorithm_result)}\n{algorithm_result}")
@@ -55,6 +55,7 @@ with open(f"{sys.argv[4]}", "w") as output_file:  # otwiera plik i automatycznie
 
 
 with open(f"{sys.argv[5]}", "w") as output_file:
+    print("DUPAAAAAA")
     if algorithm_result is not None:
         output_file.write(f"{len(algorithm_result)}\n")
     else:
