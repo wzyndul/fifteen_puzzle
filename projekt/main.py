@@ -37,6 +37,9 @@ elif sys.argv[1] == "bfs":
     elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
     print(round(elapsed_time, 3))
     print(algorithm_result)
+    visited_states, proceseed_states = bfs.states_counter()
+    print(visited_states)
+    print(proceseed_states)
 
 elif sys.argv[1] == "astr":
     astr = Astr(puzzle)

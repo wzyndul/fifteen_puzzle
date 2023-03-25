@@ -9,13 +9,13 @@ class Dfs:
 
     def dfs_solve(self, board):  # moze zrobic tak zeby dla dfs_a kopiowac tylko boarda, a nie cale obiekty
         if board.is_solved():
+            self.proceesed_states += 1
             return self.path
         if board.depth >= self.max_depth:
             return None
         self.visited.add(board.__hash__())
         board.move()
         for neighbor in board.get_neighbors():
-
             if neighbor.__hash__() not in self.visited:
                 self.path += neighbor.last_move  # path.append("U")
                 result = self.dfs_solve(neighbor)
@@ -27,4 +27,4 @@ class Dfs:
         return None
 
     def states_counter(self):
-        return self.visited_states , self.proceesed_states
+        return self.visited_states, self.proceesed_states
