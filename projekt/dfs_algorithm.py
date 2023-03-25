@@ -5,7 +5,7 @@ class Dfs:
 
     def __init__(self):
         self.path = ""
-        self.visited = set()
+        self.visited = {}
         self.max_depth = 20
         self.visited_states = 1
         self.processed_states = 0
@@ -29,11 +29,11 @@ class Dfs:
         if board.is_solved():
             return self.path
 
-        self.visited.add(board.__hash__())
+        self.visited[board.__hash__()] = board.depth
         board.move()
         for neighbor in board.get_neighbors():
             self.visited_states += 1
-            if neighbor.__hash__() not in self.visited:
+            if (neighbor.__hash__() in self.visited and neighbor.depth < self.visited[neighbor.__hash__()]) or neighbor.__hash__() not in self.visited:
                 self.path += neighbor.last_move
                 result = self.dfs_solve(neighbor)
                 if result is not None:
