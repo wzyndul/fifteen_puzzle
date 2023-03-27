@@ -7,11 +7,11 @@ import numpy as np
 pd.set_option('display.max_columns', None)
 
 headlines = ("glebokosc", "numer_ukladanki", "strategia", "piorytet", "dlugosc_rozw", "odwiedzone", "przetworzone", "max_rekurencja", "czas")
-with open('D:\Projects\PythonDev\SISE\SISE\projekt\wszystkiedane.csv', 'rb') as f:
+with open('wszystkiedane.csv', 'rb') as f:
     enc = chardet.detect(f.read())
 f.close()
 
-df = pd.read_csv("D:\Projects\PythonDev\SISE\SISE\projekt\wszystkiedane.csv", encoding=enc['encoding'], delimiter=' ', names = headlines)
+df = pd.read_csv("wszystkiedane.csv", encoding=enc['encoding'], delimiter=' ', names = headlines)
 
 #grouping of dataframe against relevant criteria
 dfs = df.loc[df["strategia"] == "dfs"]
@@ -47,6 +47,10 @@ criterion = "czas"
 dfs2 = dfs.groupby("glebokosc")[criterion].mean()
 bfs2 = bfs.groupby("glebokosc")[criterion].mean()
 astr2 = astr.groupby("glebokosc")[criterion].mean()
+
+dfs_log = np.log10(dfs2)
+bfs_log = np.log10(bfs2)
+astr_log = np.log10(astr2)
 
 bfs_rdul2 = bfs_rdul.groupby("glebokosc")[criterion].mean()
 bfs_rdlu2 = bfs_rdlu.groupby("glebokosc")[criterion].mean()
@@ -86,14 +90,14 @@ fig, ax = plt.subplots(figsize=(7, 5))
 #ax.bar(np.arange(len(astr2)) + 2*bar_width, astr2.values, width=bar_width, align="center", label="A*")
 
 #plot the bars for data frames (exercise 2 and 3)
-#ax.bar(np.arange(len(dfs_rdul2)), dfs_rdul2.values, width=bar_width1, align="center", label="RDUL")
-#ax.bar(np.arange(len(dfs_rdlu2)) + bar_width1, dfs_rdlu2.values, width=bar_width1, align="center", label="RDLU")
-#ax.bar(np.arange(len(dfs_drul2)) + 2*bar_width1, dfs_drul2.values, width=bar_width1, align="center", label="DRUL")
-#ax.bar(np.arange(len(dfs_drlu2)) + 3*bar_width1, dfs_drlu2.values, width=bar_width1, align="center", label="DRLU")
-#ax.bar(np.arange(len(dfs_ludr2)) + 4*bar_width1, dfs_ludr2.values, width=bar_width1, align="center", label="LUDR")
-#ax.bar(np.arange(len(dfs_lurd2)) + 5*bar_width1, dfs_lurd2.values, width=bar_width1, align="center", label="LURD")
-#ax.bar(np.arange(len(dfs_uldr2)) + 6*bar_width1, dfs_uldr2.values, width=bar_width1, align="center", label="ULDR")
-#ax.bar(np.arange(len(dfs_ulrd2)) + 7*bar_width1, dfs_ulrd2.values, width=bar_width1, align="center", label="ULRD")
+#ax.bar(np.arange(len(bfs_rdul2)), bfs_rdul2.values, width=bar_width1, align="center", label="RDUL")
+#ax.bar(np.arange(len(bfs_rdlu2)) + bar_width1, bfs_rdlu2.values, width=bar_width1, align="center", label="RDLU")
+#ax.bar(np.arange(len(bfs_drul2)) + 2*bar_width1, bfs_drul2.values, width=bar_width1, align="center", label="DRUL")
+#ax.bar(np.arange(len(bfs_drlu2)) + 3*bar_width1, bfs_drlu2.values, width=bar_width1, align="center", label="DRLU")
+#ax.bar(np.arange(len(bfs_ludr2)) + 4*bar_width1, bfs_ludr2.values, width=bar_width1, align="center", label="LUDR")
+#ax.bar(np.arange(len(bfs_lurd2)) + 5*bar_width1, bfs_lurd2.values, width=bar_width1, align="center", label="LURD")
+#ax.bar(np.arange(len(bfs_uldr2)) + 6*bar_width1, bfs_uldr2.values, width=bar_width1, align="center", label="ULDR")
+#ax.bar(np.arange(len(bfs_ulrd2)) + 7*bar_width1, bfs_ulrd2.values, width=bar_width1, align="center", label="ULRD")
 
 #plot the bars for data frames (exercise 4)
 ax.bar(np.arange(len(astr_hamm2)), astr_hamm2.values, width=bar_width, align="center", label="Hamming")
@@ -105,10 +109,13 @@ ax.set_xticklabels(xticklabels)
 
 #set the y-ticks
 plt.yticks(np.arange(0, 1.2, 0.1))
+#ytickslabels = ['10^0','10^1','10^2','10^3','10^4','10^5','10^6']
+#ax.set_yticklabels(ytickslabels)
+#ax.set_yscale('log')
 
 #set the x-axis and y-axis labels
 ax.set_xlabel("Głębokość rozwiązania")
-ax.set_ylabel("Czas trwania procesu obliczeniowego (ns)")
+ax.set_ylabel("Czas trwania procesu obliczeniowego w ms")
 
 #set the legend and title
 #ax.legend(bbox_to_anchor=(0.96, 1.1), loc='upper left', borderaxespad=0.)
@@ -117,6 +124,9 @@ plt.title("A*")
 
 #show the plot
 plt.show()
+
+
+
 
 
 
