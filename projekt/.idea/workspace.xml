@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23b460b4-c396-4572-ae2f-a5669451de32" name="Changes" comment="dodałem dane w .txt i  .csv wywalilem ukladanki bo juz niepotrzebne">
+    <list default="true" id="23b460b4-c396-4572-ae2f-a5669451de32" name="Changes" comment="dodałem na nowo puzzle, powywalałem jakiś niepotrzebny kod, komentarze">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/astr.py" beforeDir="false" afterPath="$PROJECT_DIR$/astr.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/board.py" beforeDir="false" afterPath="$PROJECT_DIR$/board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dane_txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dfs_algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/dfs_algorithm.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>

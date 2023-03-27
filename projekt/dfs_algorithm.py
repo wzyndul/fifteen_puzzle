@@ -18,8 +18,7 @@ class Dfs:
         self.elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
         return result
 
-    def dfs_start(self, board):  # moze zrobic tak zeby dla dfs_a kopiowac tylko boarda, a nie cale obiekty
-
+    def dfs_start(self, board):
         self.processed_states += 1
         if board.depth > self.max_depth:
             return None
@@ -29,11 +28,16 @@ class Dfs:
         if board.is_solved():
             return self.path
 
-        self.visited[board.__hash__()] = board.depth
+        self.visited[
+            board.__hash__()] = board.depth  # dodajemy hasha do visited jak klucz, wartoscia jest dlugosc sciezki
         board.move()
-        for neighbor in board.get_neighbors():
+        for neighbor in board.get_neighbors():  # dla kazdego sasiada (dastepnego ruchu) przechodzimy petle
             self.visited_states += 1
-            if (neighbor.__hash__() in self.visited and neighbor.depth < self.visited[neighbor.__hash__()]) or neighbor.__hash__() not in self.visited:
+            if (neighbor.__hash__() in self.visited and neighbor.depth < self.visited[
+                # jesli dany stan jest w visited,
+                neighbor.__hash__()]) or neighbor.__hash__() not in self.visited:
+                # jesli dany stan jest w visited,
+                # ale dlugosc sciezki do niego jest krotsza niz ta w visited to i tak odwiedzamy ten stan
                 self.path += neighbor.last_move
                 result = self.dfs_solve(neighbor)
                 if result is not None:

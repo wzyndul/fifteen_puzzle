@@ -8,14 +8,11 @@ from dfs_algorithm import Dfs
 
 algorithm_type = sys.argv[1]
 priority = sys.argv[2]
-with open(f"{sys.argv[3]}", "r") as f:
+with open(f"{sys.argv[3]}", "r") as f:  # wczytanie ukladanki z pliku
     rows, cols = np.fromfile(f, dtype=int, count=2, sep=" ")
     data = np.fromfile(f, dtype=int, count=rows * cols, sep=" ").reshape((rows, cols))
 
-list_puzzle = data.flatten().tolist()
-ROW = rows
-COL = cols
-MAX_DEPTH = 20
+list_puzzle = data.flatten().tolist()  # zamiana z numpy array na liste
 puzzle = Board(cols, rows, list_puzzle, priority)
 
 algorithm_result = None
@@ -45,12 +42,11 @@ elif sys.argv[1] == "astr":
     visited_states, processed_states = astr.states_counter()
     max_recursion = astr.recursion_reached()
 
-with open(f"stats/{sys.argv[4]}", "w") as output_file:  # otwiera plik i automatycznie go zamyka jak skoncze pisac
+with open(f"stats/{sys.argv[4]}", "w") as output_file:
     if algorithm_result is not None:
         output_file.write(f"{len(algorithm_result)}\n{algorithm_result}")
     else:
         output_file.write("-1")
-
 
 with open(f"stats/{sys.argv[5]}", "w") as output_file:
     if algorithm_result is not None:
@@ -61,5 +57,3 @@ with open(f"stats/{sys.argv[5]}", "w") as output_file:
     output_file.write(f"{processed_states}\n")
     output_file.write(f"{max_recursion}\n")
     output_file.write(f"{algorithm_time}")
-
-
