@@ -16,7 +16,7 @@ class Astr:
         q.put((0, self.board))
         closed_set = set()
         while not q.empty():
-            # Get the node with the lowest cost
+            # biore wezel z najnizszym kosztem
             current = q.get()[1]
             if current.depth >= self.max_recursion_reached:
                 self.max_recursion_reached = current.depth
@@ -33,7 +33,6 @@ class Astr:
                 self.elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
                 return reversed_path
 
-            # Loop through the neighbors of the current node
             current.move()
             for neighbor in current.get_neighbors():
                 self.visited_states += 1
@@ -41,7 +40,6 @@ class Astr:
                     cost = neighbor.depth + neighbor.get_heuristic_cost()
                     q.put((cost, neighbor))
 
-        # No path found
         self.elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
         return None
 

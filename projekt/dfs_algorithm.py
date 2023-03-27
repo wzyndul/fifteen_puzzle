@@ -21,7 +21,7 @@ class Dfs:
     def dfs_start(self, board):  # moze zrobic tak zeby dla dfs_a kopiowac tylko boarda, a nie cale obiekty
 
         self.processed_states += 1
-        if board.depth > self.max_depth: #TODO jeszcze z tym max depthem popatrzec bo na razie sie konczy na 19 chyba
+        if board.depth > self.max_depth:
             return None
         if board.depth >= self.max_recursion_reached:
             self.max_recursion_reached = board.depth

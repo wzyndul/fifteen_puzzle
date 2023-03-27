@@ -1,6 +1,5 @@
 import numpy as np
 import sys
-import time
 
 from astr import Astr
 from bfs_algorithm import Bfs
