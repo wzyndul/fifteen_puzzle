@@ -13,15 +13,15 @@ class Astr:
     def astr_solve(self):
         star_time = time.time_ns()
         q = PriorityQueue()
-        q.put((0, self.board))  # wkladamy kosz i dany stan
-        closed_set = set()
+        q.put((0, self.board))  # wkladamy koszt i dany stan
+        closed_set = dict()
         while not q.empty():
             current = q.get()[1]  # biore wezel z najnizszym kosztem
             if current.depth >= self.max_recursion_reached:
                 self.max_recursion_reached = current.depth
 
             self.processed_states += 1
-            closed_set.add(current.__hash__())
+            closed_set[(current.__hash__())] = current.depth
 
             if current.is_solved():
                 path = ""
@@ -35,9 +35,17 @@ class Astr:
             current.move()
             for neighbor in current.get_neighbors():
                 self.visited_states += 1
-                if neighbor.__hash__() not in closed_set:  # jesli dany stan nie byl jeszcze przetworzony
+                if (neighbor.__hash__() in closed_set and neighbor.depth < closed_set[
+                neighbor.__hash__()]) or neighbor.__hash__() not in closed_set:  # jesli dany stan nie byl jeszcze przetworzony
                     cost = neighbor.depth + neighbor.get_heuristic_cost()
-                    q.put((cost, neighbor))
+                    board_and_cost = (cost, neighbor)
+                    is_in_queue = False
+                    for item in q.queue:
+                        if item == board_and_cost:
+                            is_in_queue = True
+                            break
+                    if  not is_in_queue:
+                        q.put((cost, neighbor))
 
         self.elapsed_time = (time.time_ns() - star_time) / (10 ** 6)
         return None

@@ -8,7 +8,7 @@ from dfs_algorithm import Dfs
 
 algorithm_type = sys.argv[1]
 priority = sys.argv[2]
-with open(f"{sys.argv[3]}", "r") as f:  # wczytanie ukladanki z pliku
+with open(f"puzzles/{sys.argv[3]}", "r") as f:  # wczytanie ukladanki z pliku
     rows, cols = np.fromfile(f, dtype=int, count=2, sep=" ")
     data = np.fromfile(f, dtype=int, count=rows * cols, sep=" ").reshape((rows, cols))
 
@@ -22,7 +22,7 @@ algorithm_time = None
 max_recursion = None
 if sys.argv[1] == "dfs":
     dfs = Dfs()
-    algorithm_result = dfs.dfs_solve(puzzle)
+    algorithm_result = dfs.dfs_start(puzzle)
     algorithm_time = dfs.algorithm_time()
     visited_states, processed_states = dfs.states_counter()
     max_recursion = dfs.recursion_reached()
@@ -42,13 +42,13 @@ elif sys.argv[1] == "astr":
     visited_states, processed_states = astr.states_counter()
     max_recursion = astr.recursion_reached()
 
-with open(f"stats/{sys.argv[4]}", "w") as output_file:
+with open(f"{sys.argv[4]}", "w") as output_file:
     if algorithm_result is not None:
         output_file.write(f"{len(algorithm_result)}\n{algorithm_result}")
     else:
         output_file.write("-1")
 
-with open(f"stats/{sys.argv[5]}", "w") as output_file:
+with open(f"{sys.argv[5]}", "w") as output_file:
     if algorithm_result is not None:
         output_file.write(f"{len(algorithm_result)}\n")
     else:
