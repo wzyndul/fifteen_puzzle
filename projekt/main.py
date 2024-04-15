@@ -8,11 +8,11 @@ from dfs_algorithm import Dfs
 
 algorithm_type = sys.argv[1]
 priority = sys.argv[2]
-with open(f"puzzles/{sys.argv[3]}", "r") as f:  # wczytanie ukladanki z pliku
+with open(f"puzzles/{sys.argv[3]}", "r") as f:  # load data from file
     rows, cols = np.fromfile(f, dtype=int, count=2, sep=" ")
     data = np.fromfile(f, dtype=int, count=rows * cols, sep=" ").reshape((rows, cols))
 
-list_puzzle = data.flatten().tolist()  # zamiana z numpy array na liste
+list_puzzle = data.flatten().tolist()  # convert to list
 puzzle = Board(cols, rows, list_puzzle, priority)
 
 algorithm_result = None

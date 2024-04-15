@@ -8,8 +8,8 @@ class Board:
         self.board = puzzle
         self.parent = None
         self.last_move = ''
-        if priority == "hamm" or priority == "manh":  # jesli mam do czynienia z astarem
-            self.priority = "LURD"  # to na sztywno daje wybrana kolejnosc
+        if priority == "hamm" or priority == "manh":  # if priority is not given, then it is set to LURD
+            self.priority = "LURD"
             self.heuristic = priority
         else:
             self.priority = priority
@@ -83,12 +83,12 @@ class Board:
         distance = 0
         for x in range(0, self.row):
             for y in range(0, self.col):
-                board_value = self.board[x * self.row + y]  # wartosc z boarda
+                board_value = self.board[x * self.row + y]
                 if board_value != 0:
                     current_x = y
                     current_y = x
                     proper_x = (board_value - 1) % self.col
-                    proper_y = (board_value - 1) // self.row  # dzielenia - podłoga
+                    proper_y = (board_value - 1) // self.row
                     distance += abs(proper_x - current_x) + abs(proper_y - current_y)
         return distance
 
@@ -106,6 +106,6 @@ class Board:
         else:
             return self.manhattan_heuristic()
 
-    def __lt__(self, other):  # musiałem zdefiniować less than "<" operator, zeby móc jakoś porównywać obiekty
-        return True  # typu Board. Zwracam, true bo jak mają taki sam koszt to juz obojetnie, ktory pierwszy
+    def __lt__(self, other):  # less than operator for priority queue
+        return True
 
